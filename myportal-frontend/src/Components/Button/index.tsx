@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({ type, text, onClick, disabled}) => {
             onClick={onClick}
             disabled={disabled}
         >
-        {text}
+            {text}
         </CustomButton>
     );
 }

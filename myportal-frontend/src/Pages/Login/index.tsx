@@ -1,18 +1,39 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container, Form } from "./styles";
+import { validatedEmail, validatedPassword } from "../../Utils/validators";
 
 const Login: React.FC = () => {
+    const [loading, setLoading] = useState<Boolean>()
+    const [form, setForm] = useState<{ email: string; password: string }>({
+        email: '',
+        password: ''
+    });
+    console.log('Form', form)
 
     const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        alert('Login ')
+        try {
+            setLoading(true)
+            alert('Login')
+            setLoading(false)
+        } catch (err) {
+            alert('Algo deu errado com o Login' + err)
+        }
     }
 
     const handleChanged = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('teste de digitação',event.target.name, event.target.value)
+        setForm({...form, [event.target.name]: event.target.value})
     }
+
+    const inputValidator = () => {
+        const email = form.email.trim();
+        const password = form.password.trim();
+        return validatedEmail(email) && validatedPassword(password);
+    }
+
+    console.log('Form input é valido?', inputValidator());
 
     return (
         <Container>
@@ -25,8 +46,8 @@ const Login: React.FC = () => {
                     type='email'
                 />
                 <Input 
-                    name= 'email'
-                    placeHolder= 'Digite o sua senha'
+                    name= 'password'
+                    placeHolder= 'Digite a sua senha'
                     onChange={handleChanged}
                     type='password'
                 />
@@ -34,7 +55,7 @@ const Login: React.FC = () => {
                     type='submit'
                     text='Acessar'
                     onClick={handleSubmit}
-                    // disabled={!inputValidantion()}
+                    disabled={loading === true || !inputValidator() }
                 />
                 <div>
                     <p>Não possui conta?</p>
