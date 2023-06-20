@@ -33,8 +33,6 @@ const Login: React.FC = () => {
         return validatedEmail(email) && validatedPassword(password);
     }
 
-    console.log('Form input é valido?', inputValidator());
-
     return (
         <Container>
             <Form>
