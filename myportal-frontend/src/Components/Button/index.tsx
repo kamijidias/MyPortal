@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import { CustomButton } from "./styles";
 
 interface ButtonProps {
