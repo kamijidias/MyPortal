@@ -1,8 +1,21 @@
 import { CustomInput } from "./styles";
+import { ChangeEvent } from "react";
 
-const Input = () => {
+interface InputProps{
+    name: string;
+    placeHolder: string;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    type: string;
+}
+
+const Input: React.FC<InputProps> = ({ name, placeHolder, onChange, type}) => {
     return (
-        <CustomInput />
+        <CustomInput 
+            name={name}
+            placeholder={placeHolder}
+            onChange={onChange}
+            type={type}
+        />
     );
 }
 
