@@ -3,6 +3,9 @@ import Button from "../../Components/Button";
 import Input from "../../Components/Input";
 import { Container, Form } from "./styles";
 import { validatedEmail, validatedPassword } from "../../Utils/validators";
+import UserServices from "../../Services/UserServices";
+
+const userService = new UserServices()
 
 const Login: React.FC = () => {
     const [loading, setLoading] = useState<Boolean>()
@@ -16,7 +19,12 @@ const Login: React.FC = () => {
         event.preventDefault();
         try {
             setLoading(true)
-            alert('Login')
+            const response = await userService.Login(form)
+            console.log('response login', response)
+            if (response === true) {
+                alert ('Usuário logado com sucesso')
+                //implementar navegação para HOME
+            }
             setLoading(false)
         } catch (err) {
             alert('Algo deu errado com o Login' + err)
