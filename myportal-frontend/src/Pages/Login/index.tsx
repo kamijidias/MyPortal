@@ -39,7 +39,7 @@ const Login: React.FC = () => {
           if (!validatedPassword(password)) {
             setErrors((prevErrors) => ({
               ...prevErrors,
-              password: 'senha incorreta'
+              password: 'Senha inválida'
             }));
             setLoading(false);
             return;
@@ -70,7 +70,7 @@ const Login: React.FC = () => {
                     placeHolder= 'Digite o seu e-mail'
                     onChange={handleChanged}
                     type='email'
-                    style={{ borderColor: errors.email || errors.password ? '#FF9999' : undefined }}
+                    style={{ borderColor: errors.email ? '#FF9999' : undefined }}
                 />
                     {errors.email && <p style={{ color: '#FF9999' }}>{errors.email}</p>} 
                 <Input 
@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                     placeHolder= 'Digite a sua senha'
                     onChange={handleChanged}
                     type='password'
-                    style={{ borderColor: errors.email || errors.password ? '#FF9999' : undefined  }}
+                    style={{ borderColor: errors.password ? '#FF9999' : undefined  }}
                 />
                     {errors.password && <p style={{ color: '#FF9999' }}>{errors.password}</p>} 
                 <Button 
@@ -87,7 +87,7 @@ const Login: React.FC = () => {
                     onClick={handleSubmit}
                 />
                 <div>
-                  <a href="/forget">Esqueceu sua senha?</a>
+                  <NavLink to="/forgot">Esqueceu sua senha?</NavLink>
                 </div>
                 <ContainerSign>
                     <p>Não possui cadastro?</p>

@@ -26,6 +26,10 @@ export default class UserServices {
         return localStorage.getItem("token") !== null ? true : false
     }
 
+    async register(userData: any) {
+        return this.axios.post('/user', userData)
+    }
+
     async logout() {
         localStorage.removeItem("token")
         localStorage.removeItem("nome")

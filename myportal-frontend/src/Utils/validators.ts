@@ -8,7 +8,17 @@ const validatedPassword = (password: string): boolean => {
     return passwordRegex.test(password);
   }
 
+const valitedName = (name: string): boolean => {
+    return name?.toString().length > 3
+}
+
+const valitedConfirmPassword = (password: string ,confirmPassword: string): boolean => {
+    return validatedPassword(password) && password === confirmPassword
+}
+
 export {
     validatedEmail,
-    validatedPassword
+    validatedPassword,
+    valitedName,
+    valitedConfirmPassword
 }
