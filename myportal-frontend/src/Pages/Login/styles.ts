@@ -30,19 +30,25 @@ export const Form = styled.div`
     p {
         color: white;
         font-size: 14px;
-        padding-bottom: 10px;
+        font-weight: light;
     }
 
     a{
         color: #fff;
-        font-size: 18px;
+        font-size: 16px;
         text-decoration: none;
         border-bottom: none;
         transition: color 0.2s;
-        margin-top: auto;
     }
 
     a:hover {
         color: #ddd
     }
+`
+
+export const ContainerSign = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 0px 20px;
+    align-items: center;
 `

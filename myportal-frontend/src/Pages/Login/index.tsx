@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
-import { Container, Form } from "./styles";
+import { Container, ContainerSign, Form } from "./styles";
 import { validatedEmail, validatedPassword } from "../../Utils/validators";
 import UserServices from "../../Services/UserServices";
+import { NavLink ,useNavigate } from "react-router-dom";
 
 interface LoginFormData {
     email: string;
@@ -19,6 +20,7 @@ const Login: React.FC = () => {
         password: ''
     });
     const [errors, setErrors] = useState<Partial<LoginFormData>>({});
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -46,7 +48,7 @@ const Login: React.FC = () => {
           const response = await userService.Login(form);
           if (response) {
             alert('Usuário logado com sucesso');
-            // Implementar navegação para HOME
+            navigate('/home')
           }
           setLoading(false);
         } catch (err) {
@@ -85,9 +87,12 @@ const Login: React.FC = () => {
                     onClick={handleSubmit}
                 />
                 <div>
-                    <p>Esqueceu sua senha?</p>
-                    <a href="/register">Cadastrar</a>
+                  <a href="/forget">Esqueceu sua senha?</a>
                 </div>
+                <ContainerSign>
+                    <p>Não possui cadastro?</p>
+                    <NavLink to="register">Clique aqui</NavLink>
+                </ContainerSign>
             </Form>
         </Container>
     )
