@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Login from './Pages/Login';
 import GlobalStyle from './styles/global';
+import AppRouter from './Routes/routes';
 
 
 const root = ReactDOM.createRoot(
@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <Login />
+    <AppRouter />
   </React.StrictMode>
 );
 

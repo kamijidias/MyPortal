@@ -12,7 +12,7 @@ export default class UserServices {
         const {data} = await this.axios.post('/login', userData)
 
         if (data) {
-            localStorage.setItem("nome", data.user.name)
+            localStorage.setItem("name", data.user.name)
             localStorage.setItem("email", data.user.email)
             localStorage.setItem("token", data.user.token)
 
@@ -20,5 +20,9 @@ export default class UserServices {
         }
 
         return false;
+    }
+
+    userAuth(): boolean {
+        return localStorage.getItem("token") !== null ? true : false
     }
 }

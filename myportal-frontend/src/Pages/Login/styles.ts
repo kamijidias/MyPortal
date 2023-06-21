@@ -30,10 +30,19 @@ export const Form = styled.div`
     p {
         color: white;
         font-size: 14px;
+        padding-bottom: 10px;
     }
 
     a{
-        color: white;
-        font-size: 14px;
+        color: #fff;
+        font-size: 18px;
+        text-decoration: none;
+        border-bottom: none;
+        transition: color 0.2s;
+        margin-top: auto;
+    }
+
+    a:hover {
+        color: #ddd
     }
 `
