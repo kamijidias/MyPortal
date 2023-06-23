@@ -1,13 +1,13 @@
-package com.devkamiji.login;
+package com.myportal.MyPortal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LoginApplication {
+public class MyPortalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LoginApplication.class, args);
+		SpringApplication.run(MyPortalApplication.class, args);
 	}
 
 }

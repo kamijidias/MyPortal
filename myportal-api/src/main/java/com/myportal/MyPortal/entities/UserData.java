@@ -1,7 +1,8 @@
-package com.devkamiji.login.entities;
+package com.myportal.MyPortal.entities;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,23 +10,33 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_user")
-public class User {
-	
+@Table (name = "userData")
+public class UserData {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(nullable = false)
 	private String name;
-	private Integer cellphone;
+	
+	private String secondName;
+	
+	@Column(nullable = false)
+	private String password;
+	
+	@Column(nullable = false)
 	private String email;
 	
-	public User() {
+	public UserData() {
+		
 	}
 
-	public User(Long id, String name, Integer cellphone, String email) {
+	public UserData(Long id, String name, String secondName, String password, String email) {
 		this.id = id;
 		this.name = name;
-		this.cellphone = cellphone;
+		this.secondName = secondName;
+		this.password = password;
 		this.email = email;
 	}
 
@@ -45,12 +56,20 @@ public class User {
 		this.name = name;
 	}
 
-	public Integer getCellphone() {
-		return cellphone;
+	public String getSecondName() {
+		return secondName;
 	}
 
-	public void setCellphone(Integer cellphone) {
-		this.cellphone = cellphone;
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -74,7 +93,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserData other = (UserData) obj;
 		return Objects.equals(id, other.id);
 	}
 }
