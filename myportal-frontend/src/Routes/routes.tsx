@@ -2,20 +2,24 @@ import React from 'react';
 import Login from "../Pages/Login";
 import Register from '../Pages/Register';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ForgotPassword from '../Pages/ForgotPassword';
 import Home from '../Pages/Home';
+import { ProtectedRouter } from './ProtectedRoutes';
+import { AuthProvider } from '../Context/AuthProvider';
 
 const AppRouter: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path='*' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot' element={<ForgotPassword />} />
-        <Route path='/home' element={<Home />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='*' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgot' element={<ForgotPassword />} />
+          <Route path="/home" element={<ProtectedRouter><Home/></ProtectedRouter>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

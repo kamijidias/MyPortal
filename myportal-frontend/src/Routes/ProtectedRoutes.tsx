@@ -1,17 +1,14 @@
-import {FC, ReactNode} from 'react'
-import UserServices from "../Services/UserServices";
-import AppRouter from "./routes";
+import { useAuth } from '../Context/AuthProvider/useAuth';
 
-const userService = new UserServices();
+export const ProtectedRouter = ({ children }: {children: JSX.Element}) => {
 
-interface ProtectedRoutesProps {
-  children: ReactNode;
-}
+  const auth = useAuth();
 
-const ProtectedRoutes: FC<ProtectedRoutesProps> = ({ children }) => {
-    console.log(children)
-    const authenticatedUser = userService.userAuth();
-    return authenticatedUser ? <>{children}</> : <AppRouter />;
+  if (!auth.email) {
+    return (
+      <h1>You don't have access</h1>
+    )
+  }
+
+  return children;
 };
-
-export default ProtectedRoutes;
