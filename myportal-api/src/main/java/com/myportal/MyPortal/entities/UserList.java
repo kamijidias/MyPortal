@@ -11,11 +11,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "userData")
-public class UserData implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+@Table (name = "userList")
+public class UserList implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,26 +25,21 @@ public class UserData implements Serializable {
 	
 	private String secondName;
 	
-	@Column(nullable = false)
-	private String password;
+	private String cellphone;
 	
-	@Column(nullable = false)
-	private String confirmPassword;
+	private String zipCode;
 	
 	@Column(nullable = false)
 	private String email;
-	
-	public UserData() {	
-	}
 
-	public UserData(Long id, String name, String secondName, String password, String confirmPassword, String email) {
+	public UserList(Long id, String name, String secondName, String cellphone, String zipCode, String email) {
 		if (id != null) {
 			this.id = id;
 		}
 		this.name = name;
 		this.secondName = secondName;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
+		this.cellphone = cellphone;
+		this.zipCode = zipCode;
 		this.email = email;
 	}
 
@@ -72,20 +67,20 @@ public class UserData implements Serializable {
 		this.secondName = secondName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getCellphone() {
+		return cellphone;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getConfirmPassword() {
-		return confirmPassword;
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
 	}
 
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public String getEmail() {
@@ -109,7 +104,7 @@ public class UserData implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserData other = (UserData) obj;
+		UserList other = (UserList) obj;
 		return Objects.equals(id, other.id);
 	}
 }
