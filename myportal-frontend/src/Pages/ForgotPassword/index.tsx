@@ -42,12 +42,11 @@ const ForgotPassword: React.FC = () => {
                 />
                 <Button 
                     type='submit'
-                    text='Reenviar email'
+                    text='Enviar email'
                     onClick={handleSendEmail}
                 />
                 <ContainerSign>
-                    <p>Senha recuperada?</p>
-                    <NavLink to="login">Login</NavLink>
+                    <NavLink to="/">Login</NavLink>
                 </ContainerSign>
             </Form>
         </Container>

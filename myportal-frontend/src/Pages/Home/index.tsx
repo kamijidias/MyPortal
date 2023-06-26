@@ -1,8 +1,12 @@
+import NavBar from "../../Components/NavBar";
+import { Container } from "./styles";
 
 const Home: React.FC = () => {
     return (
-        <h1>HOME</h1>
+        <Container>
+            <NavBar />
+        </Container>
     )
 }
 
-export default Home
+export default Home;
