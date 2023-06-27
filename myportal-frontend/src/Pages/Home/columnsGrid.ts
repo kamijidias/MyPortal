@@ -12,28 +12,26 @@ type Row = {
 type Column = GridColDef & { field: keyof Row }
 
 const columns: Column[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', hideable: true},
       {
         field: 'firstName',
-        headerName: 'Primeiro nome',
+        headerName: 'Nome',
         width: 150,
-        editable: true,
       },
       {
         field: 'secondName',
-        headerName: 'Segundo nome',
+        headerName: 'Sobrenome',
         width: 150,
-        editable: true,
       },
       {
         field: 'email',
         headerName: 'Email',
-        width: 250,
+        width: 240,
       },
       {
         field: 'cellphone',
         headerName: 'Telefone',
-        width: 110,
+        width: 150,
       },
       {
         field: 'zipCode',
@@ -41,6 +39,8 @@ const columns: Column[] = [
         width: 110,
       },
     ];
+
+    const filteredColumns = columns.filter(column => column.field !== 'id');
     
     const rows = [
       { id: 1, firstName: 'Andrew', secondName: 'Kamiji', email: 'kamiji@dev.com', cellphone: '47997797018', zipCode: '88385000' },
@@ -70,4 +70,4 @@ const columns: Column[] = [
       { id: 25, firstName: 'Andrew', secondName: 'Kamiji', email: 'kamiji@dev.com', cellphone: '47997797018', zipCode: '88385000' },
     ];
 
-export {columns, rows};
+export {filteredColumns, rows};

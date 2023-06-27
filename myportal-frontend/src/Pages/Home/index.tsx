@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import UserService from '../../services/userService';
 import NavBar from '../../Componentes/Navbar';
 import Grid from '../../Componentes/DataTable';
-import { columns, rows } from './columnsGrid';
+import { filteredColumns, rows } from './columnsGrid';
+import { Box } from '@mui/system';
 
 interface HomeProps {
   content: string;
@@ -30,13 +31,18 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <NavBar />
-      <Grid 
+  <>
+    <NavBar />
+    <Box sx={{ marginTop: '2rem', textAlign: 'center' }}>
+      <h1>Lista de Usuários</h1>
+    </Box>
+    <Box sx={{ marginTop: '2rem' }}>
+      <Grid
         rows={rows}
-        columns={columns}
+        columns={filteredColumns}
       />
-    </>
+    </Box>
+  </>
   );
 };
 

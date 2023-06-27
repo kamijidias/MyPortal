@@ -2,7 +2,7 @@ import api from './api';
 
 const UserService = {
   getPublicContent() {
-    return api.get('/test/all');
+    return api.get('/test/all/');
   },
 
   getUserBoard() {

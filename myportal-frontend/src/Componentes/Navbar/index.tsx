@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import { AppBar, Box, Toolbar, Button } from '@mui/material';
@@ -47,7 +47,9 @@ function NavBar() {
     navigate('/login');
   };
 
+  const location = useLocation();
   const currentUser = 'kamiji@dev.com';
+  const currentUserId = 1;
 
   const button = {
     color: 'white',
@@ -68,11 +70,19 @@ function NavBar() {
       >
         <Toolbar sx={{ justifyContent: 'center' }}>
           <Box sx={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-            <Link to={'/profile'}>
-                <Button disableRipple sx={button}>
-                 {currentUser}
-                </Button>
+          {location.pathname === '/home' ? (
+            <Link to = {`/profile/${currentUserId}`}>
+            <Button disableRipple sx={button}>
+              {currentUser}
+            </Button>
             </Link>
+          ) : (
+            <Link to="/home">
+              <Button disableRipple sx={button}>
+                Home
+              </Button>
+            </Link>
+          )}
 
             <a href='/' onClick={logOut}>
                 <Button disableRipple sx={button}>
