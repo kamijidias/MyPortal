@@ -20,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
 import LoadingButton from '@mui/lab/LoadingButton';
 import AuthService from '../../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {
   email: string;
@@ -54,6 +55,12 @@ const Login = () => {
     password: Yup.string().required('Digite sua senha'),
   });
 
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/home');
+  }
+
   const {
     register,
     handleSubmit,
@@ -62,35 +69,38 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = (formValue: LoginProps) => {
-    const { email, password } = formValue;
+  // TRECHO COMENTADO SOMENTE PARA PODER ACESSAR O LOGIN, ENQUANTO NÃO FOI FEITO O BACK END 
 
-    setMessage('');
-    setLoading(true);
+  // const handleLogin = (formValue: LoginProps) => {
+  //   const { email, password } = formValue;
 
-    AuthService.login(email, password)
-      .then(() => {
-        setRedirect('/profile');
-        setShouldReload(true);
-      })
-      .catch(
-        (error: {
-          response: { data: { message: string } };
-          message: string;
-          toString: () => never;
-        }) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+  //   setMessage('');
+  //   setLoading(true);
 
-          setLoading(false);
-          setMessage(resMessage);
-        }
-      );
-  };
+  //   AuthService.login(email, password)
+  //     .then(() => {
+  //       setRedirect('/profile');
+  //       setShouldReload(true);
+  //     })
+  //     .catch(
+  //       (error: {
+  //         response: { data: { message: string } };
+  //         message: string;
+  //         toString: () => never;
+  //       }) => {
+  //         const resMessage =
+  //           (error.response &&
+  //             error.response.data &&
+  //             error.response.data.message) ||
+  //           error.message ||
+  //           error.toString();
+
+          
+  //         setLoading(false);
+  //         setMessage(resMessage);
+  //       }
+  //     );
+  // };
   
   if (redirect) {
     return <Navigate to={redirect} />;
@@ -128,8 +138,8 @@ const Login = () => {
           }}
         >
           <Box
+            //onSubmit={handleSubmit(handleLogin)}
             component='form'
-            onSubmit={handleSubmit(handleLogin)}
             sx={{
               '& .MuiTextField-root': { m: 1.8, width: '35ch' },
               height: '250px',
@@ -183,6 +193,7 @@ const Login = () => {
                 disableRipple
                 loading={loading}
                 variant='contained'
+                onClick={handleClick}
                 sx={{
                   width: '315px',
                   height: '50px',

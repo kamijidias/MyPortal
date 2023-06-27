@@ -1,4 +1,4 @@
-import api from './api';
+import api from './api'
 import TokenService from './token';
 
 const AuthService = {
@@ -16,6 +16,13 @@ const AuthService = {
 
   logout: () => {
     TokenService.removeUser();
+  },
+
+  sendEmail: (email: string, message: string, confirmEmail?: string) => {
+    return api.post('/email/send', {
+      email,
+      message
+    });
   },
 
   register: (username: string, email: string, password: string) => {

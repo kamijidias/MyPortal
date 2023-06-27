@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 
+import { Container, Card, CardContent } from '@mui/material';
 import UserService from '../../services/userService';
 import NavBar from '../../Componentes/Navbar';
-import Grid from '../../Componentes/DataTable';
-import { columns, rows } from './columnsGrid';
 
-interface HomeProps {
+interface ProfileProps {
   content: string;
 }
 
-const Home = () => {
-  const [,setState] = useState<HomeProps>({ content: '' });
+const Profile = () => {
+  const [,setState] = useState<ProfileProps>({ content: '' });
 
   useEffect(() => {
     UserService.getPublicContent()
@@ -29,15 +28,26 @@ const Home = () => {
       });
   }, []);
 
+  const cardContainer = 'container para adicionar campos do usuário'
+
+  const card = {
+    backgroundColor: '#E9ECEF',
+    fontSize: 20,
+    minWidth: 275,
+    boxShadow: 'none',
+    p: '20px',
+  };
+
   return (
     <>
-      <NavBar />
-      <Grid 
-        rows={rows}
-        columns={columns}
-      />
+    <NavBar />
+        <Container>
+            <CardContent>
+                <Card sx={card}>{cardContainer}</Card>
+            </CardContent>
+        </Container>
     </>
   );
 };
 
-export default Home;
+export default Profile;
