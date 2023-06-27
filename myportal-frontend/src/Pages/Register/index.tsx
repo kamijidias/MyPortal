@@ -19,16 +19,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
 import AuthService from '../../services/auth';
 
-type RegisterProps = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
-type State = {
-  successful: boolean;
-  message: string;
-};
+import { RegisterProps, State } from './types';
+import { boxSubmitStyle, buttonStyle, errorIconStyle, errorStyle, formControlStyle, formStyle } from './styles';
 
 const Register: React.FC<object> = () => {
   const [state, setState] = useState<State>({
@@ -49,10 +41,10 @@ const Register: React.FC<object> = () => {
       .max(40, 'Senha excede o máximo de 40 caracteres'),
     confirmPassword: Yup.string()
     .required('Campo obrigatório')
-    .test('password-match', 'Senha não são compatíveis!', function (value) {
+    .test('password-match', 'Senhas estão diferentes!', function (value) {
       return value === this.parent.password;
     })
-    .min(8, 'Senha não são compatíveis!')
+    .min(8, 'Senhas estão diferentes!')
     .max(40, 'Senha excede o máximo de 40 caracteres'),
   });
 
@@ -99,48 +91,16 @@ const Register: React.FC<object> = () => {
 
   const { successful, message } = state;
 
-  const form = {
-    maxWidth: '360px',
-    height: '450px',
-    f: 20,
-    p: '40px',
-    mt: '40px',
-    border: '1px solid #ced4da',
-    borderRadius: '5px',
-    boxShadow: '6',
-    flexDirection: 'column',
-  };
-
-  const error = {
-    height: 0,
-    color: 'red',
-    fontSize: 12,
-    mb: '5px',
-    display: 'flex',
-    alignItems: 'center',
-  };
-
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={form}>
+      <Box sx={formStyle}>
         <FormControl
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            height: '300px',
-          }}
+          sx={formControlStyle}
         >
           <Box
             component='form'
             onSubmit={handleSubmit(handleRegister)}
-            sx={{
-              '& .MuiTextField-root': { m: 1.8, width: '35ch' },
-              height: '350px',
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              alignContent: 'space-between',
-            }}
+            sx={boxSubmitStyle}
             noValidate
             autoComplete='off'
           >
@@ -154,8 +114,8 @@ const Register: React.FC<object> = () => {
                   {...register('email')}
                 />
                 {errors.email && (
-                  <Box sx={error}>
-                    <ErrorIcon sx={{ mr: 0.5, ml: 1.5, width: '15px' }} />
+                  <Box sx={errorStyle}>
+                    <ErrorIcon sx={errorIconStyle} />
                     {errors.email.message}
                   </Box>
                 )}
@@ -169,8 +129,8 @@ const Register: React.FC<object> = () => {
                   {...register('password')}
                 />
                 {errors.password && (
-                  <Box sx={error}>
-                    <ErrorIcon sx={{ mr: 0.5, ml: 1.5, width: '15px' }} />
+                  <Box sx={errorStyle}>
+                    <ErrorIcon sx={errorIconStyle} />
                     {errors.password.message}
                   </Box>
                 )}
@@ -184,8 +144,8 @@ const Register: React.FC<object> = () => {
                   {...register('confirmPassword')}
                 />
                 {errors.confirmPassword && (
-                  <Box sx={error}>
-                    <ErrorIcon sx={{ mr: 0.5, ml: 1.5, width: '15px' }} />
+                  <Box sx={errorStyle}>
+                    <ErrorIcon sx={errorIconStyle} />
                     {errors.confirmPassword.message}
                   </Box>
                 )}
@@ -200,16 +160,7 @@ const Register: React.FC<object> = () => {
               <Button
                 type='submit'
                 disableRipple
-                sx={{
-                  width: '315px',
-                  height: '50px',
-                  bgcolor: '#000000',
-                  color: '#fff',
-                  '&:hover': {
-                    bgcolor: '#000000',
-                    opacity: [0.9, 0.8, 0.7],
-                  },
-                }}
+                sx={buttonStyle}
               >
                 <span>Cadastrar</span>
               </Button>

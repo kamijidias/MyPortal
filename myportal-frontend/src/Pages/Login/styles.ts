@@ -35,6 +35,7 @@ export const linkStyle = {
     display: 'block', 
     textDecoration: 'none', 
     color: '#000000',
+    marginTop: '1rem',
     '&:hover': {
     color: '#333333',
     },

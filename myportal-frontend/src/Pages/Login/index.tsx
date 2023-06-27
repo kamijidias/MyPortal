@@ -51,7 +51,7 @@ const Login = () => {
     };
   }, [shouldReload]);
 
-  const schema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     email: Yup.string().required('Digite seu email'),
     password: Yup.string().required('Digite sua senha'),
   });
@@ -67,7 +67,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginProps>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
   });
 
   // TRECHO COMENTADO SOMENTE PARA PODER ACESSAR O LOGIN, ENQUANTO NÃO FOI FEITO O BACK END 

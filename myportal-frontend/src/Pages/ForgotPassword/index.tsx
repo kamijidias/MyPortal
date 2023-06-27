@@ -19,15 +19,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
 import AuthService from '../../services/auth';
 
-type ForgotPassowodProps = {
-  email: string;
-  confirmEmail: string;
-};
-
-type State = {
-  successful: boolean;
-  message: string;
-};
+import { ForgotPassowodProps, State } from './types';
+import { boxSubmitStyle, errorIconStyle, errorStyle, formStyle } from './styles';
 
 const Register: React.FC<object> = () => {
   const [state, setState] = useState<State>({
@@ -92,30 +85,9 @@ const Register: React.FC<object> = () => {
 
   const { successful, message } = state;
 
-  const form = {
-    maxWidth: '360px',
-    height: '450px',
-    f: 20,
-    p: '40px',
-    mt: '40px',
-    border: '1px solid #ced4da',
-    borderRadius: '5px',
-    boxShadow: '6',
-    flexDirection: 'column',
-  };
-
-  const error = {
-    height: 0,
-    color: 'red',
-    fontSize: 12,
-    mb: '5px',
-    display: 'flex',
-    alignItems: 'center',
-  };
-
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={form}>
+      <Box sx={formStyle}>
         <FormControl
           sx={{
             display: 'flex',
@@ -126,14 +98,7 @@ const Register: React.FC<object> = () => {
           <Box
             component='form'
             onSubmit={handleSubmit(handleSendEmail)}
-            sx={{
-              '& .MuiTextField-root': { m: 1.8, width: '35ch' },
-              height: '350px',
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              alignContent: 'space-between',
-            }}
+            sx={boxSubmitStyle}
             noValidate
             autoComplete='off'
           >
@@ -147,8 +112,8 @@ const Register: React.FC<object> = () => {
                   {...register('email')}
                 />
                 {errors.email && (
-                  <Box sx={error}>
-                    <ErrorIcon sx={{ mr: 0.5, ml: 1.5, width: '15px' }} />
+                  <Box sx={errorStyle}>
+                    <ErrorIcon sx={errorIconStyle} />
                     {errors.email.message}
                   </Box>
                 )}
@@ -162,8 +127,8 @@ const Register: React.FC<object> = () => {
                   {...register('confirmEmail')}
                 />
                 {errors.confirmEmail && (
-                  <Box sx={error}>
-                    <ErrorIcon sx={{ mr: 0.5, ml: 1.5, width: '15px' }} />
+                  <Box sx={errorStyle}>
+                    <ErrorIcon sx={errorIconStyle} />
                     {errors.confirmEmail.message}
                   </Box>
                 )}
