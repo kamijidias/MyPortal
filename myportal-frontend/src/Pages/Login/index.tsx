@@ -21,7 +21,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import LoadingButton from '@mui/lab/LoadingButton';
 import AuthService from '../../services/auth';
 
-interface FormValues {
+interface LoginProps {
   email: string;
   password: string;
 }
@@ -58,11 +58,11 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm<LoginProps>({
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = (formValue: FormValues) => {
+  const handleLogin = (formValue: LoginProps) => {
     const { email, password } = formValue;
 
     setMessage('');
