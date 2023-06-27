@@ -9,7 +9,7 @@ interface HomeProps {
 }
 
 const Home = () => {
-  const [state, setState] = useState<HomeProps>({ content: '' });
+  const [,setState] = useState<HomeProps>({ content: '' });
 
   useEffect(() => {
     UserService.getPublicContent()
@@ -28,6 +28,8 @@ const Home = () => {
       });
   }, []);
 
+  const cardContainer = 'container para adicionar listagem de usuários'
+
   const card = {
     backgroundColor: '#E9ECEF',
     fontSize: 20,
@@ -41,7 +43,7 @@ const Home = () => {
     <NavBar />
         <Container>
             <CardContent>
-                <Card sx={card}>{state.content}</Card>
+                <Card sx={card}>{cardContainer}</Card>
             </CardContent>
         </Container>
     </>

@@ -50,8 +50,8 @@ const Login = () => {
   }, [shouldReload]);
 
   const schema = Yup.object().shape({
-    email: Yup.string().required('Campo obrigatório'),
-    password: Yup.string().required('Campo obrigatório'),
+    email: Yup.string().required('Digite seu email'),
+    password: Yup.string().required('Digite sua senha'),
   });
 
   const {

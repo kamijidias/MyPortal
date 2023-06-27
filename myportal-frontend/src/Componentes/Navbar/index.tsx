@@ -11,7 +11,7 @@ type NavbarProps = {
 };
 
 function NavBar() {
-  const [state, setState] = useState<NavbarProps>({
+  const [, setState] = useState<NavbarProps>({
 
     currentUser: undefined,
   });
