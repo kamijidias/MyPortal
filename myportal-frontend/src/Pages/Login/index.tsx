@@ -21,6 +21,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import LoadingButton from '@mui/lab/LoadingButton';
 import AuthService from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
+import { error, form, linkStyle, loadingButtonStyle } from './styles';
 
 interface LoginProps {
   email: string;
@@ -106,27 +107,6 @@ const Login = () => {
     return <Navigate to={redirect} />;
   }
 
-  const form = {
-    maxWidth: '360px',
-    height: '500px',
-    f: 20,
-    p: '40px',
-    mt: '40px',
-    border: '1px solid #ced4da',
-    borderRadius: '5px',
-    boxShadow: '6',
-    flexDirection: 'column',
-  };
-
-  const error = {
-    height: 0,
-    color: 'red',
-    fontSize: 12,
-    mb: '5px',
-    display: 'flex',
-    alignItems: 'center',
-  };
-
   return (
     <Container sx={{ display: 'flex', justifyContent: 'center' }}>
       <Box sx={form}>
@@ -194,41 +174,16 @@ const Login = () => {
                 loading={loading}
                 variant='contained'
                 onClick={handleClick}
-                sx={{
-                  width: '315px',
-                  height: '50px',
-                  bgcolor: '#000000',
-                  color: '#fff',
-                  '&:hover': {
-                    bgcolor: '#000000',
-                    color: '#fff',
-                    opacity: [0.9, 0.8, 0.7],
-                  },
-                }}
+                sx={loadingButtonStyle}
               >
                 <span>Acessar</span>
               </LoadingButton>
             </Box>
             <Box marginTop={'2rem'} textAlign="center">
-              <Link href="/forgot-password" sx={{ 
-                  display: 'block', 
-                  textDecoration: 'none', 
-                  marginBottom: '2rem',
-                  color: '#000000', 
-                  '&:hover': {
-                    color: '#333333',
-                  }, }}
-                >
+              <Link href="/forgot-password" sx={linkStyle}>
                 Esqueceu sua senha?
               </Link>
-              <Link href="/register" sx={{ 
-                  display: 'block', 
-                  textDecoration: 'none', 
-                  color: '#000000',
-                '&:hover': {
-                  color: '#333333',
-                } }}
-                >
+              <Link href="/register" sx={linkStyle}>
                 Deseja se cadastrar?
               </Link>
             </Box>
