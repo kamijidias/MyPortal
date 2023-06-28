@@ -1,44 +1,41 @@
 import { useEffect, useState } from 'react';
 
-import { filteredColumns, rows } from './columnsGrid';
-import UserService from '../../services/userService';
-import NavBar from '../../Componentes/Navbar';
 import Grid from '../../Componentes/DataTable';
+import NavBar from '../../Componentes/Navbar';
+import { filteredColumns, rows } from './columnsGrid';
 import { Box } from '@mui/system';
 
-import { HomeProps } from './types';
+import UserService from '../../services/userService';
 
 const Home = () => {
-  const [,setState] = useState<HomeProps>({ content: '' });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    UserService.getPublicContent()
+    UserService.getUserLoged()
       .then((response) => {
-        setState({
-          content: response.data,
-        });
+        setUser(response.data);
       })
       .catch((error) => {
-        setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString(),
-        });
+        console.error(
+          error.response?.data 
+          || error.message 
+          || error.toString()
+        );
       });
   }, []);
+
+  console.log(user);
 
   return (
     <>
       <NavBar />
       <Box sx={{ marginTop: '2rem', textAlign: 'center' }}>
-        <h1>Lista de Usuários</h1>
+        <h1>Lista de usuários</h1>
       </Box>
-      <Box sx={{ marginTop: '2rem' }}>
-        <Grid
-          rows={rows}
-          columns={filteredColumns}
-        />
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+        </Box>
+        <Box>
+          <Grid rows={rows} columns={filteredColumns} />
       </Box>
     </>
   );

@@ -1,6 +1,6 @@
 export const formStyle = {
     maxWidth: '360px',
-    height: '450px',
+    height: '500px',
     f: 20,
     p: '40px',
     mt: '40px',
@@ -36,11 +36,28 @@ export const buttonStyle = {
     },
 }
 
+export const boxLoginStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+}
+
 export const formControlStyle = {
     display: 'flex',
     alignItems: 'center',
     height: '300px',
 }
+
+export const linkStyle = { 
+    display: 'block', 
+    textDecoration: 'none', 
+    color: '#000000',
+    marginTop: '1rem',
+    '&:hover': {
+    color: '#333333',
+    },
+};
 
 export const boxSubmitStyle = {
     '& .MuiTextField-root': { m: 1.8, width: '35ch' },

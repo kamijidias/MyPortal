@@ -15,7 +15,6 @@ const TokenService = {
       return user?.accessToken;
     },
   
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updateLocalAccessToken(token: any) {
       const userStr = localStorage.getItem('user');
       let user = null;

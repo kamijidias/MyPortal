@@ -24,13 +24,14 @@ export const errorIconStyle = {
     width: '15px' 
 };
 
-export const buttonStyle = {
+export const loadingButtonStyle = {
     width: '315px',
     height: '50px',
     bgcolor: '#000000',
     color: '#fff',
     '&:hover': {
-        bgcolor: '#000000',
-        opacity: [0.9, 0.8, 0.7],
+      bgcolor: '#000000',
+      color: '#fff',
+      opacity: [0.9, 0.8, 0.7],
     },
 }

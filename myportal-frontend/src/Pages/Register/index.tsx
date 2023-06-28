@@ -13,13 +13,14 @@ import {
   Modal,
   Collapse,
   IconButton,
+  Link,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
-import AuthService from '../../services/auth';
 
 import { RegisterProps, State } from './types';
-import { boxSubmitStyle, buttonStyle, errorIconStyle, errorStyle, formControlStyle, formStyle } from './styles';
+import { boxLoginStyle, boxSubmitStyle, buttonStyle, errorIconStyle, errorStyle, formControlStyle, formStyle, linkStyle } from './styles';
+import AuthService from '../../services/auth';
 
 const Register: React.FC<object> = () => {
   const [state, setState] = useState<State>({
@@ -36,15 +37,30 @@ const Register: React.FC<object> = () => {
       .email('Digite um email válido'),
     password: Yup.string()
       .required('Campo obrigatório!')
-      .min(8, 'A senha precisa conter 8 caracteres')
+      .test('password', 
+      'A senha precisa conter pelo menos 8 caracteres', 
+      function (value) {
+        return value.length >= 8;
+      })
+      .test('password', 
+      'A senha precisa conter pelo menos uma letra maiúscula', 
+      function (value) {
+        return /[A-Z]/.test(value);
+      })
+      .test('password', 
+      'A senha precisa conter pelo menos um caractere especial', 
+      function (value) {
+        return /[@$!%*?&]/.test(value);
+      })
       .max(40, 'Senha excede o máximo de 40 caracteres'),
     confirmPassword: Yup.string()
-    .required('Campo obrigatório')
-    .test('password-match', 'Senhas estão diferentes!', function (value) {
-      return value === this.parent.password;
-    })
-    .min(8, 'Senhas estão diferentes!')
-    .max(40, 'Senha excede o máximo de 40 caracteres'),
+      .required('Campo obrigatório')
+      .test('password-match', 'Senhas estão diferentes!', 
+      function (value) {
+        return value === this.parent.password;
+      })
+      .min(8, 'Senhas estão diferentes!')
+      .max(40, 'Senha excede o máximo de 40 caracteres'),
   });
 
   const {
@@ -151,10 +167,7 @@ const Register: React.FC<object> = () => {
               </Box>
             </Box>
             <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
+              sx={boxLoginStyle}
             >
               <Button
                 type='submit'
@@ -163,6 +176,11 @@ const Register: React.FC<object> = () => {
               >
                 <span>Cadastrar</span>
               </Button>
+              <Box textAlign='center'>
+                <Link href="/" sx={linkStyle}>
+                  Login
+                </Link>
+              </Box>
             </Box>
 
             {message && (

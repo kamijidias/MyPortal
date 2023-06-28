@@ -1,30 +1,28 @@
 import { useEffect, useState, ChangeEvent } from 'react';
-import { useParams } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup'
 
-import { Card, CardContent, TextField, Box, Button, Modal, Collapse, Alert, IconButton } from '@mui/material';
+import { Card, CardContent, TextField, Box, Modal, Collapse, Alert, IconButton } from '@mui/material';
 import { Container } from '@mui/system';
 import ErrorIcon from '@mui/icons-material/Error';
 import NavBar from '../../Componentes/Navbar';
 import Grid from '@mui/system/Unstable_Grid/Grid';
 import CloseIcon from '@mui/icons-material/Close';
+import { LoadingButton } from '@mui/lab';
 
-import { FormState, ProfileProps, initialState } from './types';
-import { buttonStyle, cardStyle, errorIconStyle, errorStyle } from './styles';
 import AuthService from '../../services/auth';
+import { FormState, initialState } from './types';
+import { cardStyle, errorIconStyle, errorStyle, loadingButtonStyle } from './styles';
 
 const Profile = () => {
-const [ state, setState] = useState<ProfileProps>({ 
-  content: '',
-  successful: false,
-  message: '' 
-});
+const [message, setMessage] = useState('');
 const [formState, setFormState] = useState<FormState>(initialState);
 const [open, setOpen] = useState(true);
+const [shouldReload, setShouldReload] = useState(false);
+const [loading, setLoading] = useState(false);
+const [successMessage, setSuccessMessage] = useState('');
   
-
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required('Campo obrigatório!')
@@ -47,22 +45,12 @@ const [open, setOpen] = useState(true);
     resolver: yupResolver(validationSchema),
   });
 
-  // useEffect(() => {
-  //   UserService.getPublicContent()
-  //     .then((response) => {
-  //       setState({
-  //         content: response.data,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       setState({
-  //         content:
-  //           (error.response && error.response.data) ||
-  //           error.message ||
-  //           error.toString(),
-  //       });
-  //     });
-  // }, [id]);
+  useEffect(() => {
+    if (shouldReload) {
+    setOpen(true);
+    setShouldReload(false);
+    }
+  }, [shouldReload]);
 
   const handleClose = () => setOpen(false);
 
@@ -74,40 +62,29 @@ const [open, setOpen] = useState(true);
     }))
   }
 
-  const handleUpdateUser = (formData: FormState) => {
-    const { name, secondName, cellphone, zipCode, email } = formData;
+  const handleUpdateUser = (formValue: FormState) => {
+    const { name, secondName, cellphone, zipCode, email } = formValue;
 
-    setState((prevState) => ({
-      ...prevState,
-      message: 'Usuário atualizado com sucesso!',
-      successful: false,
-    }));
+    setLoading(true);
 
-    AuthService.updateUser( name, secondName, cellphone, zipCode, email )
-      .then((response) => {
-        setState((prevState) => ({
-          ...prevState,
-          message: response.data.message,
-          successful: true,
-        }));
+    AuthService.updateUser(name, secondName, cellphone, zipCode, email)
+      .then(() => {
+        setSuccessMessage('Login realizado com sucesso!');
+        setShouldReload(true);
       })
-      .catch((error) => {
+      .catch((error: { response: { 
+        data: { message: string } }; message: string; 
+        toString: () => never }) => {
         const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
-        setState((prevState) => ({
-          ...prevState,
-          successful: false,
-          message: resMessage,
-        }));
+          (error.response 
+            && error.response.data 
+            && error.response.data.message
+          ) || error.message || error.toString();
+  
+        setLoading(false);
+        setMessage(resMessage);
       });
   };
-
-  const { successful, message } = state;
 
   const fullNameUser = `${formState.name} ${formState.secondName}`;
 
@@ -174,13 +151,14 @@ const [open, setOpen] = useState(true);
                   )}
                 </Grid>
                 <Grid xs={12} sx={{ alignContent: 'center', marginTop: '2rem' }}>
-                  <Button 
+                  <LoadingButton 
                     type='submit'
                     disableRipple
-                    sx={buttonStyle}
+                    loading={loading}
+                    sx={loadingButtonStyle}
                   >
                     Salvar
-                  </Button>
+                  </LoadingButton>
 
                   {message && (
                     <Modal
@@ -199,7 +177,7 @@ const [open, setOpen] = useState(true);
                         }}
                       >
                         <Collapse in={open}>
-                          {successful ? (
+                          {successMessage ? (
                             <Alert
                               severity='success'
                               action={

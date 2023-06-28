@@ -33,3 +33,40 @@ export const boxSubmitStyle = {
     flexWrap: 'wrap',
     alignContent: 'space-between',
 }
+
+export const loadingButtonStyle = {
+    width: '315px',
+    height: '50px',
+    bgcolor: '#000000',
+    color: '#fff',
+    '&:hover': {
+      bgcolor: '#000000',
+      color: '#fff',
+      opacity: [0.9, 0.8, 0.7],
+    },
+}
+
+export const linkStyle = { 
+    display: 'block', 
+    textDecoration: 'none', 
+    color: '#000000',
+    marginTop: '1rem',
+    '&:hover': {
+    color: '#333333',
+    },
+};
+
+export const boxModalStyle ={
+    position: 'absolute' as const,
+    top: '8%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+}
+
+export const boxLoginStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+}

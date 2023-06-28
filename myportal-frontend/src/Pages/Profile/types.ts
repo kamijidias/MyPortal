@@ -1,7 +1,6 @@
 export interface ProfileProps {
-    content: string;
-    successful?: boolean;
     message?: string;
+    successful?: boolean;
 }
 
 export type State = {

@@ -1,14 +1,11 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { AppBar, Box, Toolbar, Button } from '@mui/material';
-import AuthService from '../../services/auth';
-import IUser from '../../types/user';
-import EventBus from '../../utils/EventBus';
 
-type NavbarProps = {
-  currentUser: IUser | undefined;
-};
+import { NavbarProps } from './types';
+import AuthService from '../../services/auth';
+import EventBus from '../../utils/eventDispatch';
 
 function NavBar() {
   const [, setState] = useState<NavbarProps>({

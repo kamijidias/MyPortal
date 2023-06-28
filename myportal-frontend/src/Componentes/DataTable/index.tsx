@@ -1,12 +1,8 @@
 import Box from '@mui/material/Box';
-import { DataGrid, GridRowParams, GridRowsProp } from '@mui/x-data-grid';
+import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 import { GridColDef } from "@mui/x-data-grid";
 import { useNavigate } from 'react-router';
-
-type DataTableProps = {
-    columns: GridColDef[];
-    rows: GridRowsProp;
-}
+import { DataTableProps } from './types';
 
 const DataTable: React.FC<DataTableProps> = ({ columns, rows }) => {
     const navigate = useNavigate();

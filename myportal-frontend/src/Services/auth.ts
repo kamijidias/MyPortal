@@ -2,10 +2,10 @@ import api from './api'
 import TokenService from './token';
 
 const AuthService = {
-  login: async (username: string, password: string) => {
+  login: async (email: string, password: string) => {
     const response = await api
-      .post('/auth/signin', {
-        username,
+      .post('/login', {
+        email,
         password
       });
     if (response.data.accessToken) {
@@ -18,11 +18,10 @@ const AuthService = {
     TokenService.removeUser();
   },
 
-  sendEmail: (email: string, message: string, confirmEmail?: string) => {
-    return api.post('/email/send', {
+  sendEmail: (email: string, confirmEmail?: string) => {
+    return api.post('/forgot-password/send', {
       email,
       confirmEmail,
-      message
     });
   },
 

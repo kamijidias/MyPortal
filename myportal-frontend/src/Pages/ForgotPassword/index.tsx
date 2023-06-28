@@ -8,19 +8,20 @@ import {
   Box,
   FormControl,
   TextField,
-  Button,
   Alert,
   Modal,
   Collapse,
   IconButton,
+  Link,
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
-import AuthService from '../../services/auth';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import { ForgotPassowodProps, State } from './types';
-import { boxSubmitStyle, errorIconStyle, errorStyle, formStyle } from './styles';
+import { boxLoginStyle, boxModalStyle, boxSubmitStyle, errorIconStyle, errorStyle, formStyle, linkStyle, loadingButtonStyle } from './styles';
+import AuthService from '../../services/auth';
 
 const Register: React.FC<object> = () => {
   const [state, setState] = useState<State>({
@@ -134,28 +135,19 @@ const Register: React.FC<object> = () => {
                 )}
               </Box>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <Button
+            <Box sx={boxLoginStyle}>
+              <LoadingButton
                 type='submit'
                 disableRipple
-                sx={{
-                  width: '315px',
-                  height: '50px',
-                  bgcolor: '#000000',
-                  color: '#fff',
-                  '&:hover': {
-                    bgcolor: '#000000',
-                    opacity: [0.9, 0.8, 0.7],
-                  },
-                }}
+                sx={loadingButtonStyle}
               >
                 <span>Enviar email</span>
-              </Button>
+              </LoadingButton>
+              <Box textAlign='center'>
+                <Link href="/" sx={linkStyle}>
+                  Login
+                </Link>
+              </Box>
             </Box>
 
             {message && (
@@ -166,13 +158,7 @@ const Register: React.FC<object> = () => {
                 aria-describedby='modal-modal-description'
               >
                 <Box
-                  sx={{
-                    position: 'absolute' as const,
-                    top: '8%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: 400,
-                  }}
+                  sx={boxModalStyle}
                 >
                   <Collapse in={open}>
                     {successful ? (

@@ -1,4 +1,4 @@
-export const form = {
+export const formStyle = {
     maxWidth: '360px',
     height: '500px',
     f: 20,
@@ -9,6 +9,15 @@ export const form = {
     boxShadow: '6',
     flexDirection: 'column',
 };
+
+export const boxSubmitStyle = {
+    '& .MuiTextField-root': { m: 1.8, width: '35ch' },
+    height: '250px',
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    alignContent: 'space-between',
+}
 
 export const error = {
     height: 0,
