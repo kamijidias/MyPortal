@@ -1,6 +1,17 @@
 export interface ProfileProps {
     content: string;
+    successful?: boolean;
+    message?: string;
 }
+
+export interface ProfileYupProps {
+    email: string;
+}
+
+export type State = {
+    successful: boolean;
+    message: string;
+};
   
 export interface FormState {
     name: string;
@@ -11,9 +22,9 @@ export interface FormState {
 };
 
 export const initialState: FormState = {
-    name: '',
-    secondName: '',
-    cellphone: '',
-    zipCode: '',
-    email: '',
+    name: 'Andrew',
+    secondName: 'Kamiji',
+    cellphone: '4799779781',
+    zipCode: '33850000',
+    email: 'kamiji@dev.com',
 };
