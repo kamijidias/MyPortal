@@ -34,7 +34,8 @@ const Login = () => {
   const handleClose = () => setOpen(false);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Digite seu email'),
+    email: Yup.string().required('Digite seu email')
+    .email('Digite um email válido'),
     password: Yup.string().required('Digite sua senha'),
   });
 
