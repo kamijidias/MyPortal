@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -14,42 +14,30 @@ import {
   Collapse,
   IconButton,
   Link,
+  Button
 } from '@mui/material';
-
 import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
 import LoadingButton from '@mui/lab/LoadingButton';
-import AuthService from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
-import { error, form, linkStyle, loadingButtonStyle } from './styles';
 
-interface LoginProps {
-  email: string;
-  password: string;
-}
+import { LoginProps } from './types';
+import { error, form, linkStyle, loadingButtonStyle } from './styles';
+import { AuthContext } from '../../Contexts/Auth/AuthContext';
 
 const Login = () => {
+  
+  const auth = useContext(AuthContext)
+
   const [redirect, setRedirect] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(true);
   const [shouldReload, setShouldReload] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassowrd] = useState('');
 
   const handleClose = () => setOpen(false);
-
-  useEffect(() => {
-    const currentUser = AuthService.getCurrentUser();
-
-    if (currentUser) {
-      setRedirect('/profile');
-    }
-
-    return () => {
-      if (shouldReload) {
-        window.location.reload();
-      }
-    };
-  }, [shouldReload]);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().required('Digite seu email'),
@@ -57,10 +45,6 @@ const Login = () => {
   });
 
   const navigate = useNavigate()
-
-  const handleClick = () => {
-    navigate('/home');
-  }
 
   const {
     register,
@@ -70,41 +54,16 @@ const Login = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  // TRECHO COMENTADO SOMENTE PARA PODER ACESSAR O LOGIN, ENQUANTO NÃO FOI FEITO O BACK END 
-
-  // const handleLogin = (formValue: LoginProps) => {
-  //   const { email, password } = formValue;
-
-  //   setMessage('Bem vindo ao MyPortal');
-  //   setLoading(true);
-
-  //   AuthService.login(email, password)
-  //     .then(() => {
-  //       setRedirect('/profile');
-  //       setShouldReload(true);
-  //     })
-  //     .catch(
-  //       (error: {
-  //         response: { data: { message: string } };
-  //         message: string;
-  //         toString: () => never;
-  //       }) => {
-  //         const resMessage =
-  //           (error.response &&
-  //             error.response.data &&
-  //             error.response.data.message) ||
-  //           error.message ||
-  //           error.toString();
-
-          
-  //         setLoading(false);
-  //         setMessage(resMessage);
-  //       }
-  //     );
-  // };
-  
-  if (redirect) {
-    return <Navigate to={redirect} />;
+  const handleLogin = async () => {
+    if (email && password) {
+      const isLogged = await auth.login(email, password);
+      console.log(isLogged);
+      if(isLogged) {
+        navigate('/home');
+      } else {
+        alert("não deu certo");
+      }
+    }
   }
 
   return (
@@ -118,7 +77,6 @@ const Login = () => {
           }}
         >
           <Box
-            //onSubmit={handleSubmit(handleLogin)}
             component='form'
             sx={{
               '& .MuiTextField-root': { m: 1.8, width: '35ch' },
@@ -168,16 +126,17 @@ const Login = () => {
               </Box>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <LoadingButton
+              <Button
                 type='submit'
                 disableRipple
-                loading={loading}
-                variant='contained'
-                onClick={handleClick}
                 sx={loadingButtonStyle}
+                onClick={(e) => {
+                  e.preventDefault(); // Impede o comportamento padrão do formulário
+                  handleLogin(); // Chama a função de login
+                }}
               >
                 <span>Acessar</span>
-              </LoadingButton>
+              </Button>
             </Box>
             <Box marginTop={'2rem'} textAlign="center">
               <Link href="/forgot-password" sx={linkStyle}>

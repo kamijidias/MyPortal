@@ -14,7 +14,6 @@ import {
   Collapse,
   IconButton,
 } from '@mui/material';
-
 import CloseIcon from '@mui/icons-material/Close';
 import ErrorIcon from '@mui/icons-material/Error';
 import AuthService from '../../services/auth';

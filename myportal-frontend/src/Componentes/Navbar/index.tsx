@@ -40,11 +40,9 @@ function NavBar() {
     AuthService.logout();
     setState((prevState) => ({
       ...prevState,
-      showModeratorBoard: false,
-      showAdminBoard: false,
       currentUser: undefined,
     }));
-    navigate('/login');
+    navigate('/');
   };
 
   const location = useLocation();
