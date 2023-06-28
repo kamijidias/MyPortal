@@ -75,7 +75,7 @@ const Login = () => {
   // const handleLogin = (formValue: LoginProps) => {
   //   const { email, password } = formValue;
 
-  //   setMessage('');
+  //   setMessage('Bem vindo ao MyPortal');
   //   setLoading(true);
 
   //   AuthService.login(email, password)

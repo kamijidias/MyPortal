@@ -21,15 +21,32 @@ const AuthService = {
   sendEmail: (email: string, message: string, confirmEmail?: string) => {
     return api.post('/email/send', {
       email,
+      confirmEmail,
       message
     });
   },
 
-  register: (username: string, email: string, password: string) => {
-    return api.post('/auth/signup', {
-      username,
+  updateUser: (
+    name: string, 
+    secondName: string, 
+    cellphone: string, 
+    zipCode: string, 
+    email: string, 
+    ) => {
+    return api.post('/profile/update', {
+      name,
+      secondName,
+      cellphone,
+      zipCode,
       email,
-      password
+    });
+  },
+
+  register: ( email: string, password: string, confirmPassword: string) => {
+    return api.post('/auth/signup', {
+      email,
+      password,
+      confirmPassword
     });
   },
 

@@ -61,7 +61,7 @@ const Register: React.FC<object> = () => {
 
     setState((prevState) => ({
       ...prevState,
-      message: '',
+      message: 'Usuário cadastrado com sucesso',
       successful: false,
     }));
 

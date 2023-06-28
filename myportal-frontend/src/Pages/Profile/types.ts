@@ -4,14 +4,18 @@ export interface ProfileProps {
     message?: string;
 }
 
-export interface ProfileYupProps {
-    email: string;
-}
-
 export type State = {
     successful: boolean;
     message: string;
 };
+
+export interface ProfileYupProps {
+    name: string,
+    secondName: string, 
+    cellphone: string,
+    zipCode: string,
+    email: string;
+  }
   
 export interface FormState {
     name: string;
