@@ -21,7 +21,9 @@ public class MyFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		
 		if (request.getHeader("Authorization") != null) {
+			//recuperando o cabeçalho
 			Authentication auth = TokenUtil.decodeToken(request);
+			//verifica se a autorizacao é valida
 			if (auth != null) {
 				// Se a informação for valida, passo a requisição para frente(está autenticada)
 				SecurityContextHolder.getContext().setAuthentication(auth);

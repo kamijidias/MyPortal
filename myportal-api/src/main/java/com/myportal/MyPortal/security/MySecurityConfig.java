@@ -17,6 +17,7 @@ public class MySecurityConfig {
 		http.csrf().disable() //desabilitando o csrf (para tratar a autentificacao dos usuarios)
 			.authorizeHttpRequests() //as requisicoes http sao passiveis de autorizacao
 			.requestMatchers(HttpMethod.GET, "/free").permitAll() //especificando quem esta permitido para navegar
+			.requestMatchers(HttpMethod.POST, "/login").permitAll()
 			.anyRequest().authenticated().and().cors(); //todas as outras urls terao necessidade de autenticação
 		
 		http.addFilterBefore(new MyFilter(), UsernamePasswordAuthenticationFilter.class);
