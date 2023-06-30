@@ -21,9 +21,9 @@ public class UserList implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String name;
+	private String firstName;
 	
-	private String secondName;
+	private String lastName;
 	
 	private String cellphone;
 	
@@ -32,12 +32,12 @@ public class UserList implements Serializable {
 	@Column(nullable = false)
 	private String email;
 
-	public UserList(Long id, String name, String secondName, String cellphone, String zipCode, String email) {
+	public UserList(Long id, String firstName, String lastName, String cellphone, String zipCode, String email) {
 		if (id != null) {
 			this.id = id;
 		}
-		this.name = name;
-		this.secondName = secondName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.cellphone = cellphone;
 		this.zipCode = zipCode;
 		this.email = email;
@@ -51,20 +51,20 @@ public class UserList implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getSecondName() {
-		return secondName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
+	public void setSecondName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getCellphone() {

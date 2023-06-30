@@ -5,9 +5,9 @@ import com.myportal.MyPortal.entities.UserData;
 public class UserDataDTO {
 	private Long id;
 		
-		private String name;
+		private String firstName;
 		
-		private String secondName;
+		private String lastName;
 
 		private String email;
 	
@@ -16,8 +16,8 @@ public class UserDataDTO {
 
 	public UserDataDTO(UserData entity) {
 		id = entity.getId();
-		name = entity.getName();
-		secondName = entity.getSecondName();
+		firstName = entity.getFirstName();
+		lastName = entity.getLastName();
 		email = entity.getEmail();
 	}
 
@@ -25,12 +25,12 @@ public class UserDataDTO {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public String getSecondName() {
-		return secondName;
+	public String getLastName() {
+		return lastName;
 	}
 
 	public String getEmail() {

@@ -21,9 +21,9 @@ public class UserData implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String name;
+	private String firstName;
 	
-	private String secondName;
+	private String lastName;
 	
 	@Column(nullable = false)
 	private String password;
@@ -31,17 +31,23 @@ public class UserData implements Serializable {
 	@Column(nullable = false)
 	private String email;
 	
+	private String cellphone;
+	
+	private String zipCode;
+	
 	public UserData() {	
 	}
 
-	public UserData(Long id, String name, String secondName, String password, String email) {
+	public UserData(Long id, String firstName, String lastName, String password, String email, String cellphone, String zipCode) {
 		if (id != null) {
 			this.id = id;
 		}
-		this.name = name;
-		this.secondName = secondName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.password = password;
 		this.email = email;
+		this.cellphone = cellphone;
+		this.zipCode = zipCode;
 	}
 
 	public Long getId() {
@@ -52,20 +58,20 @@ public class UserData implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getSecondName() {
-		return secondName;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -82,6 +88,22 @@ public class UserData implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getCellphone() {
+		return cellphone;
+	}
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
+	}
+	
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	@Override
