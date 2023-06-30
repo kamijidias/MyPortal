@@ -14,11 +14,11 @@ public class MySecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable() //desabilitando o csrf (para tratar a autentificacao dos usuarios)
-			.authorizeHttpRequests() //as requisicoes http sao passiveis de autorizacao
-			.requestMatchers(HttpMethod.GET, "/free").permitAll() //especificando quem esta permitido para navegar
+		http.csrf().disable() 
+			.authorizeHttpRequests() 
+			.requestMatchers(HttpMethod.GET, "/", "create").permitAll()
 			.requestMatchers(HttpMethod.POST, "/login").permitAll()
-			.anyRequest().authenticated().and().cors(); //todas as outras urls terao necessidade de autenticação
+			.anyRequest().authenticated().and().cors(); 
 		
 		http.addFilterBefore(new MyFilter(), UsernamePasswordAuthenticationFilter.class);
 		
