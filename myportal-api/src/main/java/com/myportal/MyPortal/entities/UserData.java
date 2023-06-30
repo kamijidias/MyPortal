@@ -29,22 +29,18 @@ public class UserData implements Serializable {
 	private String password;
 	
 	@Column(nullable = false)
-	private String confirmPassword;
-	
-	@Column(nullable = false)
 	private String email;
 	
 	public UserData() {	
 	}
 
-	public UserData(Long id, String name, String secondName, String password, String confirmPassword, String email) {
+	public UserData(Long id, String name, String secondName, String password, String email) {
 		if (id != null) {
 			this.id = id;
 		}
 		this.name = name;
 		this.secondName = secondName;
 		this.password = password;
-		this.confirmPassword = confirmPassword;
 		this.email = email;
 	}
 
@@ -78,14 +74,6 @@ public class UserData implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
 	}
 
 	public String getEmail() {

@@ -1,1 +1,1 @@
-INSERT INTO USER_DATA (name, second_name, password, confirm_password, email) VALUES ('andrew', 'kamiji', '123', '123', 'mail@mail.com')
+INSERT INTO USER_DATA (name, second_name, password, email) VALUES ('andrew', 'kamiji', '123', 'kamiji@dev.com')

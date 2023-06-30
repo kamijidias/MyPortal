@@ -18,12 +18,12 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class TokenUtil {
 	
-	// algumas const utilitarias
+	// constantes utilitarias
 	private static final String ISSUER = "MyPortal";
 	
 	private static final String TOKEN_HEADER = "Bearer ";
 	
-	private static final String TOKEN_KEY = "0123456789012345678901234567890";
+	private static final String TOKEN_KEY = "01234567890123456789012345678901";
 	
 	private static final long ONE_SECOND = 1000;
 	
@@ -41,22 +41,28 @@ public class TokenUtil {
 	}
 
 	public static Authentication decodeToken(HttpServletRequest request){
-		
-		String jwtToken = request.getHeader("Authorization");
-		jwtToken = jwtToken.replace(TOKEN_HEADER, "");
-		
-		// Fazendo a leitura do token;
-		Jws<Claims> jwsClaims = Jwts.parserBuilder().setSigningKey(TOKEN_KEY.getBytes()).build().parseClaimsJws(jwtToken);
-		
-		//Extraindo o token
-		String user = jwsClaims.getBody().getSubject();
-		String issuer = jwsClaims.getBody().getIssuer();
-		Date validated = jwsClaims.getBody().getExpiration();
-		
-		if (user.length() > 0 && issuer.equals(ISSUER) && validated.after(new Date(System.currentTimeMillis()))) {
-			return new UsernamePasswordAuthenticationToken("user", null, Collections.emptyList());
+		try {
+			String jwtToken = request.getHeader("Authorization");
+			jwtToken = jwtToken.replace(TOKEN_HEADER, "");
+			
+			// Fazendo a leitura do token;
+			Jws<Claims> jwsClaims = Jwts.parserBuilder().setSigningKey(TOKEN_KEY.getBytes()).build().parseClaimsJws(jwtToken);
+			
+			//Extraindo o token
+			String user = jwsClaims.getBody().getSubject();
+			String issuer = jwsClaims.getBody().getIssuer();
+			Date validated = jwsClaims.getBody().getExpiration();
+			
+			if (user.length() > 0 && issuer.equals(ISSUER) && validated.after(new Date(System.currentTimeMillis()))) {
+				return new UsernamePasswordAuthenticationToken("user", null, Collections.emptyList());
+			}
+			
+		} catch(Exception ex) {
+			
+			System.out.println("DEBUG - Erro ao decodificar token");
+			System.out.println(ex.getMessage());
+			
 		}
-		
 		return null;
 	}
 }
